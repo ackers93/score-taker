@@ -1,27 +1,20 @@
-%h1 Listing games
+%h1 Select your Game or Create a new one!
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th Description
-      %th Rules
-      %th Score to win
-      %th
-      %th
-      %th
+.game-container
+  - @games.each do |game|
+    = link_to(game), :class => "game-card" do
+      - colors_arr = ['#B0FCE8', '#CBD5F6', '#FCB0B4', "#FED486", "#DD7169"]
+      .game-card{:style => "background-color: #{colors_arr.sample};"} 
+        %p{:class => "game-name"}
+          = game.name
+        %p{:class => "game-desc"}
+          = game.description
 
-  %tbody
-    - @games.each do |game|
-      %tr
-        %td= game.name
-        %td= game.description
-        %td= game.rules
-        %td= game.score_to_win
-        %td= link_to 'Show', game
-        %td= link_to 'Edit', edit_game_path(game)
-        %td= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' }
+
+
+      -# = link_to 'Edit', edit_game_path(game)
+      -# = link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 
-= link_to 'New Game', new_game_path
+= link_to 'New Game', new_game_path, {:class => "new-game-button"}
